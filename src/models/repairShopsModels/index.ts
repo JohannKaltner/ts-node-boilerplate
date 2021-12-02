@@ -49,6 +49,18 @@ repairShop.findAll = function (result: any) {
   });
 };
 
+
+repairShop.findById = function (id, result) {
+  connection.query("Select * from repairShops where id = ? ", id, function (err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      result(null, res);
+    }
+  });
+};
+
 repairShop.create = function (newEntrie, result) {
   connection.query("INSERT INTO oficinas set ?", newEntrie, function (err, res) {
     if (err) {
@@ -60,3 +72,5 @@ repairShop.create = function (newEntrie, result) {
     }
   });
 };
+
+export default repairShop
