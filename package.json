@@ -1,0 +1,44 @@
+{
+  "name": "radar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Node.js Rest Apis with Express, Sequelize & MySQL",
+  "license": "MIT",
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "api",
+    "sequelize",
+    "mysql"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
+    "eslint": "^8.3.0",
+    "eslint-config-google": "^0.14.0",
+    "git-cz": "^4.8.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.2"
+  },
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts",
+    "commit":"git-cz"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "log4js": "^6.3.0",
+    "morgan-body": "^2.6.6",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.0-alpha.1"
+  }
+}
