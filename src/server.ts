@@ -12,23 +12,30 @@ config({ path: ".env" }
     // }
 );
 
+
 const app = express();
 
-
-const corsOptions = {
-    origin: 'http://localhost:3333'
-};
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}));
 
 morganBody(app);
 
-
-app.use(process.env.URL_API_LOCAL + "oficinas", repairShopRouter);
+app.use(`${process.env.URL_API_LOCAL}repairShops`, repairShopRouter);
 
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors(corsOptions));
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
