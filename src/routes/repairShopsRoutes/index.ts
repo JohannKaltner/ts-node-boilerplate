@@ -9,7 +9,7 @@ import {
 
 const repairShopRouter = express.Router();
 
-repairShopRouter.get("/listarTodos", findAllRepairShops);
+repairShopRouter.get("/", findAllRepairShops);
 
 repairShopRouter.get("/:id", findRepairShopById);
 
