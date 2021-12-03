@@ -15,4 +15,6 @@ export interface IRepairShop {
   ddd: number
   phone1: number
   phone2: number
+
+  findAll: (page: string, limit: number, result: any) => void
 }

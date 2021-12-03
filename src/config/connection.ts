@@ -1,16 +1,16 @@
 'user strict';
 import mysql from "mysql2";
-import dbConfig from "./config.db";
-
-const connection = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB
-});
+import dbConfig from './config.db'
+console.log({
+  host: process.env.URL_DATABASE,
+  user: process.env.USER_DATABASE,
+  password: process.env.PASSWORD_DATABASE,
+  database: process.env.NAME_DATABASE
+})
+const connection = mysql.createConnection(dbConfig);
 
 connection.connect(function (err) {
   if (err) throw err;
-  console.log("Conexão com o banco de dados realizada com êxito!");
+  console.log("Connected...");
 });
 export default connection
