@@ -1,0 +1,15 @@
+{
+  "watch": ["src"],
+  "exec": "ts-node --project tsconfig.json src/server.ts",
+  "ext": "js ts",
+  "events": {
+    "restart": "kill-port 3000",
+    "crash": "kill-port 3000"
+  },
+  "env": {
+    "URL_DATABASE" :"localhost",
+    "USER_DATABASE":"root",
+    "PASSWORD_DATABASE":"",                            
+    "NAME_DATABASE":"radaroficinasdb"
+  }
+}

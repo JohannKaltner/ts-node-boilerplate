@@ -25,16 +25,23 @@
     "eslint": "^8.3.0",
     "eslint-config-google": "^0.14.0",
     "git-cz": "^4.8.0",
+    "kill-port": "^1.6.1",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.2"
   },
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
-    "commit":"git-cz"
+    "dev": "nodemon",
+    "commit": "git-cz",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc",
+    "start": "node ."
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "log4js": "^6.3.0",
     "morgan-body": "^2.6.6",

@@ -21,32 +21,22 @@ const repairShop = function (repairShop: IRepairShop) {
 };
 
 
-repairShop.getPagination = function (page: string, limit: number, result: any) {
-  const pagina = parseInt(page);
-  const offset = (pagina - 1) * limit;
-  connection.query(
-    "Select * from oficinas limit " + limit + " OFFSET " + offset,
-    function (err, res) {
+repairShop.findAll = function (page: string, limit: number, result: any) {
+  const currPage = page && parseInt(page);
+  const offset = currPage && (currPage - 1) * limit;
+  const hasLimit = limit ? `limit ${limit}` : ''
+  const hasOffset = offset ? `OFFSET ${offset}` : ''
+
+  connection.query(`Select * from repairShops ${hasOffset
+    } ${hasLimit}`, function (err, res) {
       if (err) {
         console.log("error: ", err);
-        result(err, null);
+        result(null, err);
       } else {
+        console.log("oficinas : ", res);
         result(null, res);
       }
-    }
-  );
-};
-
-repairShop.findAll = function (result: any) {
-  connection.query("Select * from oficinas limit 20", function (err, res) {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-    } else {
-      console.log("oficinas : ", res);
-      result(null, res);
-    }
-  });
+    });
 };
 
 
@@ -61,8 +51,8 @@ repairShop.findById = function (id, result) {
   });
 };
 
-repairShop.create = function (newEntrie, result) {
-  connection.query("INSERT INTO oficinas set ?", newEntrie, function (err, res) {
+repairShop.create = function (repairShop, result) {
+  connection.query("INSERT INTO repairShops set ?", repairShop, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -72,5 +62,49 @@ repairShop.create = function (newEntrie, result) {
     }
   });
 };
+
+repairShop.update = function (id, repairShop, result) {
+  connection.query(
+    "UPDATE oficinas SET nome=?,cnpj=?,rua=?,numero=?,bairro=?,cidade=?, estado=?, latitude=?, longitude=?, id_usuario =?, criadoEm=?, atualizadoEm=?,cep=?, ddd=?, telefone1=?, telefone2=?, WHERE id = ?",
+    [
+      repairShop.name,
+      repairShop.cnpj,
+      repairShop.street,
+      repairShop.number,
+      repairShop.district,
+      repairShop.city,
+      repairShop.state,
+      repairShop.lat,
+      repairShop.long,
+      repairShop.userId,
+      repairShop.createdAt,
+      repairShop.updatedAt,
+      repairShop.zipCode,
+      repairShop.ddd,
+      repairShop.phone1,
+      repairShop.phone2,
+      id,
+    ],
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+repairShop.delete = function (id, result) {
+  connection.query("DELETE FROM oficinas WHERE id = ?", [id], function (err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+    } else {
+      result(null, res);
+    }
+  });
+};
+
 
 export default repairShop
