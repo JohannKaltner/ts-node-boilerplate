@@ -6,12 +6,13 @@ import {
   updateRepairShop,
   deleteRepairShop
 } from "../../controllers/repairShopsControllers/";
+import { authenticateToken } from "../../middlewares/auth";
 
 const repairShopRouter = express.Router();
 
-repairShopRouter.get("/", findAllRepairShops);
+repairShopRouter.get("/", authenticateToken, findAllRepairShops);
 
-repairShopRouter.get("/:id", findRepairShopById);
+repairShopRouter.get("/:id", authenticateToken, findRepairShopById);
 
 repairShopRouter.post("/", createRepairShop);
 

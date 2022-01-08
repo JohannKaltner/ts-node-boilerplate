@@ -40,7 +40,7 @@ repairShop.findAll = function (page: string, limit: number, result: any) {
 };
 
 
-repairShop.findById = function (id, result) {
+repairShop.findById = function (id: number, result) {
   connection.query("Select * from repairShops where id = ? ", id, function (err, res) {
     if (err) {
       console.log("error: ", err);

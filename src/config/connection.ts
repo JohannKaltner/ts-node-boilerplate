@@ -7,10 +7,14 @@ console.log({
   password: process.env.PASSWORD_DATABASE,
   database: process.env.NAME_DATABASE
 })
-const connection = mysql.createConnection(dbConfig);
 
+const connection = mysql.createConnection(dbConfig);
+// const handleConnect = () =>
 connection.connect(function (err) {
-  if (err) throw err;
+  if (err) console.log(err);
+  ;
   console.log("Connected...");
 });
+
+
 export default connection

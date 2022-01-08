@@ -6,6 +6,7 @@
     "URL_DATABASE" :"localhost",
     "USER_DATABASE":"root",
     "PASSWORD_DATABASE":"",                            
-    "NAME_DATABASE":"radaroficinasdb"
+    "NAME_DATABASE":"radaroficinasdb",
+    "JSON_SECRET":"@RadarSecret@"
   }
 }

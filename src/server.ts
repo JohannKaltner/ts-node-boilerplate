@@ -3,6 +3,7 @@ import morganBody from 'morgan-body';
 import cors from 'cors'
 import repairShopRouter from './routes/repairShopsRoutes';
 import { config } from 'dotenv';
+import userRouter from './routes/userRoutes';
 const PORT = process.env.PORT || 3333;
 
 config({ path: ".env" }
@@ -16,17 +17,20 @@ config({ path: ".env" }
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     credentials: true,
 }));
 
 morganBody(app);
 
-app.use(`${process.env.URL_API_LOCAL}repairShops`, repairShopRouter);
-
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
+app.use(`${process.env.URL_API_LOCAL}repairShops`, repairShopRouter);
+
+app.use(`${process.env.URL_API_LOCAL}user`, userRouter);
+
+
+app.use(express.urlencoded({ extended: false }));
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
